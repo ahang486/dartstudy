@@ -1,8 +1,74 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  print('hello world');
+
   //runApp(const MyApp());
+}
+
+void ch1() {
+  // 1-0.
+  // ignore: avoid_print
+  print('hello world');
+
+  // 1-1. The var keyword
+  // 일반적으로 var는 지역변수 일 때 권장
+  var name = 'test'; // 생성값이 있으면 type 고정
+  // compile error --> name = 1;
+  name = 'update';
+  name.length;
+
+  String nameStr = 'test2';
+  nameStr.length;
+
+  // 1-2. Dynamic Type
+  var nameD;
+  dynamic nameDD;
+
+  // 외부에서 받은 자료를 dynamic으로 받아서 type 검증
+  nameD = 100;
+  nameDD = 'xxx';
+
+  if (nameDD is String) {
+    nameDD.isNotEmpty;
+  }
+  if (nameD is int) {
+    nameD.isEven;
+  }
+
+  // 1-3. Nullable Variables
+  String nico = 'nico';
+  nico.length;
+  //nico = null; // 모든 변수의 default는 null 허용 안 함
+
+  String? nullableNico = 'nuco';
+  nullableNico = null;
+  nullableNico?.isNotEmpty; // null이 아니라면 호출해줘
+
+  // 1-4. Final Variables
+  const nameF = 'nico';
+  nameF.endsWith('x');
+  //name_f = 'xx'; // error
+
+  // 1-5. LAte Variables
+  late final String nameLF;
+  // do something,
+  //print(nameLF); // error
+
+  nameLF = 'from api';
+  //name_lf = 'xxx'; // error
+  nameLF.length;
+
+  // 1-6. Constant Variables
+  // compile time constans
+  // compile 시점에 알고있는 값으로 제한
+  // 화면이나 api를 통해 알게되는 값이라면 var, final 을 사용
+  const maxLen = 100;
+  while (maxLen < 1000) {
+  }
+}
+
+void ch2() {
+
 }
 
 class MyApp extends StatelessWidget {
