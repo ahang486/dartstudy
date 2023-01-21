@@ -21,18 +21,19 @@ void ch1() {
   nameStr.length;
 
   // 1-2. Dynamic Type
-  var nameD;
+  // ignore: prefer_typing_uninitialized_variables
+  var intD;
   dynamic nameDD;
 
   // 외부에서 받은 자료를 dynamic으로 받아서 type 검증
-  nameD = 100;
+  intD = 100;
   nameDD = 'xxx';
 
   if (nameDD is String) {
     nameDD.isNotEmpty;
   }
-  if (nameD is int) {
-    nameD.isEven;
+  if (intD is int) {
+    intD.isEven;
   }
 
   // 1-3. Nullable Variables
@@ -68,7 +69,79 @@ void ch1() {
 }
 
 void ch2() {
+  // 2-0. Basic Data Types
+  num x = 12;
+  x = 1.1;
+  x.isFinite;
 
+  // 2-1. Lists
+  var numbers = [1, 2, 3,];
+  numbers.add(4);
+  numbers.last;
+
+  List<int> numS = [2, 4, 6];
+  numS.add(1);
+
+  var giveMeFive = true;
+  var numIF = [
+    1,
+    2,
+    if (giveMeFive) 5
+  ];
+  numIF.length;
+
+  // 2-2. String Interpolation
+  var name = 'nico';
+  var age = 10;
+  var greeting = 'hello, my name is $name and ${age + 2}';
+  greeting.length;
+
+  // 2-3. Collection For
+  // 특히, Collection If는 UI에서 log in 여부 등을 다룰 때 매우 편해짐
+  var oldFriends = ['A', 'B'];
+  var newFriends = [
+    'C', 'D', 'E',
+    for (var friend in oldFriends) "* $friend"
+  ];
+  newFriends.length;
+
+  // 2-4. Maps
+  var player = {
+    'name': 'nico',
+    'xp': 19.99,
+    'superpower': false
+  };
+  player.length;
+
+  Map<int, bool> myP = {
+    1: true,
+    2: false,
+  };
+  myP.length;
+
+  Map<List<int>, bool> myPL = {
+    [1, 11, 21]: true,
+    [2, 22, 32]: false,
+  };
+  myPL.length;
+
+  // 2-5. Set
+  var numSet = {1, 2, 3};
+  numSet.add(1); // 중복이므로 영향 없음
+}
+
+void ch3() {
+  // 3-0. Defining a Function
+
+  // 3-1. Named Parameters
+
+  // 3-2. Recap
+
+  // 3-3. Optional Positional Parameters
+
+  // 3-4. QQ Operator
+
+  // 3-5. Typedef
 }
 
 class MyApp extends StatelessWidget {
