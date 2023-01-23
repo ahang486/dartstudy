@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,7 +9,6 @@ void main() {
 
 void ch1() {
   // 1-0.
-  // ignore: avoid_print
   print('hello world');
 
   // 1-1. The var keyword
@@ -130,18 +131,73 @@ void ch2() {
   numSet.add(1); // 중복이므로 영향 없음
 }
 
+void sayHello(String name) {
+  print("Hello $name nice to meet you.");
+}
+
+String sayHelloDirect1({String name='anonymous', int age=0}) =>
+    "Hello $name, $age";
+
+// required로 강제화 시키거나, default value를 주도록 강제화 (안전!)
+String sayHelloDirect2({required String name, int age=-1}) {
+  return "Hello $name, $age";
+}
+
+String optionalPositionalArgs(String name, [int? age = -1]) =>
+    "$name, $age";
+
+String qq1(String? name) {
+  if (name != null) return name.toUpperCase();
+  return 'NULL';
+}
+
+String qq2(String? name) =>
+    name != null ? name.toUpperCase() : 'NULL';
+
+// ?? : 왼쪽이 null이 아닌 경우, 오른쪽이 null인 경우
+String qq3(String? name) =>
+    name?.toUpperCase() ?? 'NULL';
+
+List<int> reverseInt(List<int> argList) {
+  return argList.reversed.toList();
+}
+
+typedef ListInt = List<int>;
+ListInt reverseInt2(ListInt argList) {
+  return argList.reversed.toList();
+}
+
+String makeSen(Map<String, String> argMap) {
+  return "$argMap['name']";
+}
+
+typedef UserInfo = Map<String, String>;
+String makeSen2(UserInfo argMap) {
+  return "$argMap['name']";
+}
+
 void ch3() {
   // 3-0. Defining a Function
 
   // 3-1. Named Parameters
+  print(sayHelloDirect2(name: 'psy', age: 20));
 
   // 3-2. Recap
+  // positional arguments : 사용을 지양하자.
+  // named arguments : required 혹은 default value
 
   // 3-3. Optional Positional Parameters
+  optionalPositionalArgs('test');
 
   // 3-4. QQ Operator
+  // ??= null인 경우에만 값 부여
+  String? name;
+  name ??= 'NULL';
+  name = null;
+  name ??= 'NULL2';
 
   // 3-5. Typedef
+  // 그냥 alias 역할로, 간단한 List/ Map 등 타이핑 줄이기용
 }
 
 class MyApp extends StatelessWidget {
