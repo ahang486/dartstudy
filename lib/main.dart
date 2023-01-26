@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, avoid_function_literals_in_foreach_calls
 
 import 'package:flutter/material.dart';
 
@@ -198,6 +198,142 @@ void ch3() {
 
   // 3-5. Typedef
   // 그냥 alias 역할로, 간단한 List/ Map 등 타이핑 줄이기용
+}
+
+class Player {
+  final String name;
+  int xp;
+
+  Player(this.name, this.xp);
+
+  void sayHello() {
+    print('Name: $name, XP: $xp');
+  }
+}
+
+abstract class Human {
+  void walk();
+}
+
+class PlayerNamed extends Human {
+  final String name;
+  int xp;
+
+  PlayerNamed({required this.name, required this.xp,});
+
+  PlayerNamed.createZero({required this.name})
+      : xp = 0;
+
+  PlayerNamed.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        xp = json['xp'];
+
+  void sayHello() {
+    print('Name: $name, XP: $xp');
+  }
+
+  @override
+  void walk() {
+    print('walking');
+  }
+}
+
+enum Team { red, blue }
+
+class Person {
+  final String name;
+
+  Person({required this.name});
+
+  void sayHello() { print('hello $name'); }
+}
+
+class Coach extends Person {
+  Team team;
+
+  Coach({required this.team, required String name})
+      : super(name: name);
+
+  @override
+  void sayHello() {
+    super.sayHello();
+    print('$team');
+  }
+}
+
+class Strong {
+  final double strength = 99.9;
+}
+
+class Quick {
+  void run() {
+    print('ruuuun');
+  }
+}
+
+class Tall {
+  final int height = 199;
+}
+
+class SuperMan with Strong, Quick, Tall {}
+
+class Baby with Quick {}
+
+void ch4() {
+  // 4-0. Your First Dart Class
+
+  // 4-1. Constructors
+  var pl = Player('psy', 3000);
+  pl.sayHello();
+
+  // 4-2. Named Constructor Parameters
+  var plNamed = PlayerNamed(name: 'name', xp: 100);
+  plNamed.sayHello();
+
+  // 4-3. Named Constructors
+  var plNamed2 = PlayerNamed.createZero(name: 'zero call');
+  plNamed2.sayHello();
+
+  // 4-4. Recap
+  var jsonData =
+      [
+        {
+          'name' : 'psy',
+          'xp' : 100,
+        },
+        {
+          'name' : 'lee',
+          'xp' : 10,
+        },
+      ];
+
+  jsonData.forEach((rawJ) {
+    var pl = PlayerNamed.fromJson(rawJ);
+    pl.sayHello();
+  });
+
+  // 4-5. Cascade Notation
+  var plCa = PlayerNamed(name: 'name', xp: 100)
+  ..xp = 200
+  ..sayHello();
+
+  plCa.sayHello();
+
+  // 4-6. Enums
+  Team team = Team.blue;
+  print(team);
+
+  // 4-7. Abstract Classes
+
+  // 4-8. Inheritance
+  var coach = Coach(team: Team.blue, name: 'park');
+  coach.sayHello();
+
+  // 4-9. Mixins
+  // 생성자가 없는 class를 의미
+  // 부모 관계로 상속받지 않고, 모든 프로퍼티, 메소드를 재조합 하는 것
+  var superMan = SuperMan();
+  superMan.run();
 }
 
 class MyApp extends StatelessWidget {
